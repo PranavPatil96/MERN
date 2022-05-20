@@ -1,0 +1,62 @@
+[
+    {
+        "DeptName": "Testing",
+        "EmpNo": "Eng-001",
+        "Name": "Ranjan",
+        "Grade":"A"
+    },
+    {
+        "DeptName": "Architecture",
+        "EmpNo": "Eng-002",
+        "Name": "Siddarth",
+        "Grade":"B"
+    },
+    {
+        "DeptName": "Testing",
+        "EmpNo": "Eng-003",
+        "Name": "Komal",
+        "Grade":"B"
+    },
+    {
+        "DeptName": "Architecture",
+        "EmpNo": "Eng-004",
+        "Name": "Vaishnavi",
+        "Grade":"C"
+    },
+    {
+        "DeptName": "Testing",
+        "EmpNo": "Eng-005",
+        "Name": "Manish",
+        "Grade":"D"
+    },
+    {
+        "DeptName": "Testing",
+        "EmpNo": "Eng-006",
+        "Name": "Poonam",
+        "Grade":"E"
+    },
+    {
+        "DeptName": "Architecture",
+        "EmpNo": "Eng-007",
+        "Name": "Kunal",
+        "Grade":"F"
+    },
+    {
+        "DeptName": "Testing",
+        "EmpNo": "Eng-008",
+        "Name": "Mahesh",
+        "Grade":"G"
+    },
+    {
+        "DeptName": "Architecture",
+        "EmpNo": "Eng-009",
+        "Name": "Tejas",
+        "Grade":"H"
+    },
+    {
+        "DeptName": "Testing",
+        "EmpNo": "Eng-010",
+        "Name": "Amar",
+        "Grade":"I"
+    }
+]

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script>
+        $(document).ready(function () {
+      $("#btn").on("click", function () {
+        alert("Click using jQuery");
+      });
+    });
+    $(document).ready(function () {
+      $("#btn").on("click", function () {
+        alert("Clicked");
+        $.ajax({
+          url: "http://localhost:7011/api/employees",
+          method: "GET",
+        })
+          .done(function (resp) {
+            $("#dv").html(JSON.stringify(resp.data));
+          //  console.log(resp.data.designation);
+            $.each(resp.data, function (key, value) { 
+                console.log(value);
+							$('#exampleid').append("<tr>\
+										<td>"+value.empno+"</td>\
+										<td>"+value.empname+"</td>\
+										<td>"+value.designation+"</td>\
+                                        <td>"+value.salary+"</td>\
+                                        <td>"+value.deptno+"</td>\
+										</tr>");
+						})
+            alert("Success");
+          })
+          .fail(function (err) {
+            $("#dv").html(err);
+            alert("Failed");
+          });
+      });
+   
+    $("#btnSave").on("click",function(){
+      alert("Save button is clicked")
+      var empNo = parseInt(document.getElementById("txtEmpNo").value);
+      var empName = document.getElementById("txtEmpName").value;
+      var designation = document.getElementById("txtDesig").value;
+      var deptno = document.getElementById("txtDept").value;
+      var salary = document.getElementById("txtSalary").value;
+      var emp1 = {
+        empno: empNo,
+        empname: empName,
+        designation: designation,
+        salary:salary,
+        deptno:deptno,
+      };
+        $.ajax({
+          url: "http://localhost:7011/api/employees",
+          type: "POST",
+          contentType: "application/json;charset=utf-8",
+          data: JSON.stringify(emp1),
+        })
+        .done(function (resp) {
+            $("#dv").html(JSON.stringify(resp));
+            $.each(resp.data, function (key, value) { 
+                console.log(value);
+							
+						})
+          })
+          .fail(function (err) {
+            $("#dv").html(err);
+            alert("Failed");
+          });
+    });
+    $("#txtEmpNo").on('change',function(){
+      var employeeNo = document.getElementById('txtEmpNo').value;
+      $.ajax({
+          url: "http://localhost:7011/api/employees/"+employeeNo,
+          type: "GET",
+          contentType: "application/json;charset=utf-8",
+        //  data: JSON.stringify(emp),
+        })
+        .done(function (resp) {
+            $("#dv").html(JSON.stringify(resp));
+            console.log(JSON.stringify(resp.data.empname));
+            $("#txtEmpName").val(resp.data.empname)
+            $("#txtDesig").val(resp.data.designation)
+            $("#txtSalary").val(resp.data.salary)
+            $("#txtDept").val(resp.data.deptno)
+          })
+          .fail(function (err) {
+            $("#dv").html(err);
+            alert("Failed");
+          });
+    });
+    $("#btnUpdate").on('click',function(){
+      var empNo = parseInt(document.getElementById("txtEmpNo").value);
+      var empName = document.getElementById("txtEmpName").value;
+      var designation = document.getElementById("txtDesig").value;
+      var deptno = document.getElementById("txtDept").value;
+      var salary = document.getElementById("txtSalary").value;
+      var emp1 = {
+        empno: empNo,
+        empname: empName,
+        designation: designation,
+        salary:salary,
+        deptno:deptno,
+      };
+      $.ajax({
+          url: "http://localhost:7011/api/employees/"+empNo,
+          type: "PUT",
+          contentType: "application/json;charset=utf-8",
+          data: JSON.stringify(emp1),
+        })
+        .done(function (resp) {
+            $("#dv").html(JSON.stringify(resp));
+            
+          })
+          .fail(function (err) {
+            $("#dv").html(err);
+            alert("Failed");
+          });
+    });
+    $("#btnDelete").on('click',function(){
+      var employeeNo = document.getElementById('txtEmpNo').value;
+      $.ajax({
+          url: "http://localhost:7011/api/employees/"+employeeNo,
+          type: "DELETE",
+          contentType: "application/json;charset=utf-8",
+         // data: JSON.stringify(emp1),
+        })
+        .done(function (resp) {
+            $("#dv").html(JSON.stringify(resp));
+            alert(employeeNo+ " is deleted successfully!")
+          })
+          .fail(function (err) {
+            $("#dv").html(err);
+            alert("Failed");
+          });
+          document.getElementById('txtEmpNo').value = '';
+      document.getElementById('txtEmpName').value = '';
+      document.getElementById('txtDesig').value = '';
+      document.getElementById('txtSalary').value = '';
+      document.getElementById('txtDept').value = '';
+    });
+    $("#btnClear").on('click',function(){
+      document.getElementById('txtEmpNo').value = '';
+      document.getElementById('txtEmpName').value = '';
+      document.getElementById('txtDesig').value = '';
+      document.getElementById('txtSalary').value = '';
+      document.getElementById('txtDept').value = '';
+    });
+  });
+    </script>
+</head>
+<body>
+  <h1>The Contact Page</h1>
+  <table class="table table-bordred table-striped">
+    <tbody>
+        <tr>
+            <td>
+                <a href="/">Index</a>
+            </td>
+            <td>
+                <a href="/home">Home</a>
+            </td>
+            <td>
+                <a href="/about">About</a>
+            </td>
+            <td>
+                <a href="/contact">Contact</a>
+            </td>
+        </tr>  
+    </tbody>
+</table>
+<button id="btn" class="btn btn-primary">Click Me</button>
+  <hr />
+<!-- Consume API -->
+<h1>Consume API Assignment 18th April</h1>
+<div id="dv"></div>
+<!-- Create -->
+<table class="table table-striped">
+    <tr>
+      <td>EmpNo</td>
+      <td><input type="text" id="txtEmpNo" class="form-control" /></td>
+    </tr>
+    <tr>
+      <td>EmpName</td>
+      <td><input type="text" id="txtEmpName" class="form-control" /></td>
+    </tr>
+    <tr>
+      <td>Designation</td>
+      <td><input type="text" id="txtDesig" class="form-control" /></td>
+    </tr>
+    <tr>
+        <td>Salary</td>
+        <td><input type="text" id="txtSalary" class="form-control" /></td>
+      </tr>
+      <tr>
+        <td>Dept No</td>
+        <td><input type="text" id="txtDept" class="form-control" /></td>
+      </tr>
+    <tr>
+      <td></td>
+      <td>
+        <input type="button" id="btnSave" value="ADD" class="btn btn-primary" />
+        <input type="button" id="btnUpdate" value="Update" class="btn btn-warning" />
+        <input type="button" id="btnDelete" value="Delete" class="btn btn-danger" />
+        <input type="button" id="btnClear" value="Clear" class="btn btn-secondary" />
+      </td>
+    </tr>
+  </table>
+<!-- Create end -->
+<div class="col-lg-12">
+    <table class="table table-bordered table-striped" id="myTable">
+           <thead>
+            <tr>
+                <th>Employee no</th>
+                <th>Employee name</th>
+                <th>Designation </th>
+                <th>Salary </th>
+                <th>Dept No</th>
+            </tr>
+        </thead>
+        <tbody id="exampleid">
+
+        </tbody>
+        </table> 
+  </div>
+</body>
+</html>

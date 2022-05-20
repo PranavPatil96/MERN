@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./closefunction.js"></script>
+    <script src="./uigenerator.js"></script>
+    <script>
+        window.onload = function(){
+        var empObj = new Logic();
+        var res = empObj.getEmployees();
+        console.log('Employees = ' + JSON.stringify(res));
+
+        var emp = {EmpNo:103, EmpName: 'C'};   
+        res = empObj.addEmployee(emp); 
+        console.log('Employees After add = ' + JSON.stringify(res));
+
+        var emp1 = {EmpNo:103, EmpName: 'C'}; 
+        res = empObj.deleteEmployee(emp1);
+        console.log('Employees After delete = ' + JSON.stringify(res));
+
+       var emp3 = {EmpNo:102, EmpName:'h', DeptName:'Development', Designation:'Developer', Salary:8088};  
+       res = empObj.updateEmployee(emp3);
+        console.log('Employees After Update = ' + JSON.stringify(res)); 
+
+        var res2 = empObj.getEmployees();
+        var uiGenerator1 = new UIGenerator(res2);
+        document.getElementById('dvtable').innerHTML = uiGenerator1.table();
+
+
+       var dept = empObj.getDeptname();
+       var uiGenerator2 = new UIGenerator(dept);
+       document.getElementById('dvselectdeptname').innerHTML = uiGenerator2.select();
+
+       var desig = empObj.getDesignationName();
+       var uiGenerator3 = new UIGenerator(desig);
+       document.getElementById('dvselectdesigname').innerHTML = uiGenerator3.select();
+        }
+    </script>
+</head>
+<body>
+    <h1>Using JS Close Functions AKA Function Object</h1>
+    <h3>Table Using UIGenerator:</h3>
+    <div id="dvtable"></div><br>
+    <h3>Dept Using UIGenerator:</h3>
+    <div id="dvselectdeptname"></div><br>
+    <h3>Designation Using UIGenerator:</h3>
+    <div id="dvselectdesigname"></div>
+</body>
+</html>

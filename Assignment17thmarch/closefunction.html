@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../practiceassign17thmarch/closefunction.js"></script>
+    <script src="../practiceassign17thmarch/uigenerator copy.js"></script>
+    <script>
+        window.onload = function(){
+        var empObj = new Logic();
+        var res = empObj.getEmployees();
+        console.log('Employees = ' + JSON.stringify(res));
+        var res2 = empObj.getEmployees();
+        var uiGenerator1 = new UIGenerator(res2);
+        document.getElementById('dvtable').innerHTML = uiGenerator1.table();
+        //
+        var btnsave = document.getElementById('btnsave');
+        var btnedit = document.getElementById('btnedit');
+        var btndelete = document.getElementById('btndelete');
+        
+        btnsave.addEventListener('click',function(){
+            var empNo = parseInt(document.getElementById('empNo').value);
+        var empName = document.getElementById('empName').value;
+        var dvselectdeptname = document.getElementById('dvselectdeptname').value;
+        var dvselectdesigname = document.getElementById('dvselectdesigname').value;
+        var salary = parseInt(document.getElementById('salary').value);
+           
+          //  var emp = {EmpNo:103, EmpName: 'C'};   
+          var emp1 = {
+                EmpNo:empNo,
+                 EmpName:empName,
+                 DeptName:dvselectdeptname,
+                 Designation:dvselectdesigname,
+                 Salary:salary
+          }
+            res = empObj.addEmployee(emp1); 
+            console.log('Employees After add = ' + JSON.stringify(res));
+            var res2 = empObj.getEmployees();
+        var uiGenerator1 = new UIGenerator(res2);
+        document.getElementById('dvtable').innerHTML = uiGenerator1.table();
+        },false)
+
+        btnedit.addEventListener('click',function(){
+            var empNo = parseInt(document.getElementById('empNo').value);
+             var empName = document.getElementById('empName').value;
+             var dvselectdeptname = document.getElementById('dvselectdeptname').value;
+             var dvselectdesigname = document.getElementById('dvselectdesigname').value;
+             var salary = parseInt(document.getElementById('salary').value);
+           
+            
+            var emp1 = {
+                 EmpNo:empNo,
+                 EmpName:empName,
+                 DeptName:dvselectdeptname,
+                 Designation:dvselectdesigname,
+                 Salary:salary
+
+             } 
+             res = empObj.updateEmployee(emp1);
+            console.log('Employees After Update = ' + JSON.stringify(res)); 
+            var res2 = empObj.getEmployees();
+            var uiGenerator1 = new UIGenerator(res2);
+            document.getElementById('dvtable').innerHTML = uiGenerator1.table();
+        },false)
+
+        btndelete.addEventListener('click',function(){
+            var item = document.getElementById('empNo').value;
+            res = empObj.deleteEmployee(item);
+            console.log('Employees After delete = ' + JSON.stringify(res));
+            document.getElementById('empNo').value = '';
+            document.getElementById('empName').value= '';
+           document.getElementById('dvselectdeptname').value= '';
+           document.getElementById('dvselectdesigname').value= '';
+           document.getElementById('salary').value= '';
+            var res2 = empObj.getEmployees();
+            var uiGenerator1 = new UIGenerator(res2);
+            document.getElementById('dvtable').innerHTML = uiGenerator1.table();
+            
+        },false)
+
+    //     var emp1 = {EmpNo:103, EmpName: 'C'}; 
+    //     res = empObj.deleteEmployee(emp1);
+    //     console.log('Employees After delete = ' + JSON.stringify(res));
+
+    //   var emp3 = {EmpNo:102, EmpName:'h', DeptName:'Development', Designation:'Developer', Salary:8088};  
+    //    res = empObj.updateEmployee(emp3);
+    //     console.log('Employees After Update = ' + JSON.stringify(res)); 
+
+        var e = document.getElementById('empNo');
+        e.addEventListener('change',function(){
+           var id = e.value;
+           var a =[];
+           var ename,deptname,designame,sal;
+            a = empObj.getEmployeeById(id);
+         //  console.log("value of a "+JSON.stringify(a['EmpNo']));
+           ename = a['EmpName'];
+           deptname = a['DeptName'];
+           designame = a['Designation'];
+           sal = a['Salary'];
+        //    for(var i =0;i<a.length;i++){
+        //        console.log("Array "+a[0]);
+        //         ename = a['EmpName'];
+        //         deptname = a[i]['DeptName'];
+        //         designame = a[i]['Designation'];
+        //         sal = a[i]['Salary'];
+                
+        //    }
+        //   console.log("Ename "+ename);
+           document.getElementById('empName').value= ename;
+           document.getElementById('dvselectdeptname').value= deptname;
+           document.getElementById('dvselectdesigname').value= designame;
+           document.getElementById('salary').value= sal;
+        },false)
+
+
+       var dept = empObj.getDeptname();
+       var uiGenerator2 = new UIGenerator(dept);
+       document.getElementById('dvselectdeptname').innerHTML = uiGenerator2.select();
+
+       var desig = empObj.getDesignationName();
+       var uiGenerator3 = new UIGenerator(desig);
+       document.getElementById('dvselectdesigname').innerHTML = uiGenerator3.select();
+        }
+    </script>
+</head>
+<body>
+    <h1>Using JS Close Functions AKA Function Object</h1>
+    
+    <!-- <h3>Dept Using UIGenerator:</h3>
+    <div id="dvselectdeptname"></div><br>
+    <h3>Designation Using UIGenerator:</h3>
+    <div id="dvselectdesigname"></div> -->
+    <!-- Using Form -->
+    <div>
+    <h1>Assignment 17th March</h1>
+        <table>
+            <tr>
+                <td>
+                   <lable> Employee No:</lable>
+                </td>
+                <td>
+                    <input type="text" id="empNo">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   <lable> Employee Name:</lable>
+                </td>
+                <td>
+                    <input type="text" id="empName">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   <lable> Department Name:</lable>
+                </td>
+                <td>
+                    <select id="dvselectdeptname"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   <lable> Designation Name:</lable>
+                </td>
+                <td>
+                  <select id="dvselectdesigname"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   <lable> Salary:</lable>
+                </td>
+                <td>
+                    <input type="text" id="salary">
+                </td>
+            </tr>
+            <tr>                
+                <td >
+                    
+                </td>
+                <td >
+                    <input type="button" id="btnsave" value="Save">
+                    <input type="button" id="btnedit" value="Update">
+                    <input type="button" id="btndelete" value="Delete"> 
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <h3>Table Using UIGenerator:</h3>
+    <div id="dvtable"></div><br>
+    
+</body>
+</html>

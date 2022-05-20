@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            var firstInput,secondInput,op,result;
+            // Get ID of Each Buttons
+            var btnone = document.getElementById('one');
+            var btntwo = document.getElementById('two');
+            var btnthree = document.getElementById('three');
+            var btnfour = document.getElementById('four');
+            var btnfive = document.getElementById('five');
+            var btnsix = document.getElementById('six');
+            var btnseven = document.getElementById('seven');
+            var btneight = document.getElementById('eight');
+            var btnnine = document.getElementById('nine');
+            var btnzero = document.getElementById('zero');
+            var btnclr = document.getElementById('clr');
+            var btnplus = document.getElementById('btnplus');
+            var btnminus = document.getElementById('btnminus');
+            var btnmul = document.getElementById('btnmul');
+            var btndiv = document.getElementById('btndiv');
+            var btnmod = document.getElementById('btnmod');
+            var btnsqrt = document.getElementById('btnsquare');
+            var btnpower = document.getElementById('btnpower');
+            var btnequal = document.getElementById('btnequal');
+            var btndouble = document.getElementById('btndouble');
+
+            console.log("========================ADD EVENT LISTENER========================================");
+            btnone.addEventListener('click',function(){
+                if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+                    document.getElementById('res1').value = "1";
+                }else{
+                    document.getElementById('res1').value = document.getElementById('res1').value + "1";
+                }
+            },false)
+            btntwo.addEventListener('click',function(){
+                if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+                    document.getElementById('res1').value = "2";
+                }else{
+                    document.getElementById('res1').value = document.getElementById('res1').value + "2";
+                }
+            },false)
+            btnthree.addEventListener('click',function(){
+                if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+                    document.getElementById('res1').value = "3";
+                }else{
+                    document.getElementById('res1').value = document.getElementById('res1').value + "3";
+                }
+            },false)
+            btnfour.addEventListener('click',function(){
+                if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+                    document.getElementById('res1').value = "4";
+                }else{
+                    document.getElementById('res1').value = document.getElementById('res1').value + "4";
+                }
+            },false)
+            btnfive.addEventListener('click',function(){
+                if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+                    document.getElementById('res1').value = "5";
+                }else{
+                    document.getElementById('res1').value = document.getElementById('res1').value + "5";
+                }
+            },false)
+            btnsix.addEventListener('click',function(){
+                if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+                    document.getElementById('res1').value = "6";
+                }else{
+                    document.getElementById('res1').value = document.getElementById('res1').value + "6";
+                }
+            },false)
+            btnseven.addEventListener('click',function(){
+                if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+                    document.getElementById('res1').value = "7";
+                }else{
+                    document.getElementById('res1').value = document.getElementById('res1').value + "7";
+                }
+            },false)
+            btneight.addEventListener('click',function(){
+                if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+                    document.getElementById('res1').value = "8";
+                }else{
+                    document.getElementById('res1').value = document.getElementById('res1').value + "8";
+                }
+            },false)
+            btnnine.addEventListener('click',function(){
+                if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+                    document.getElementById('res1').value = "9";
+                }else{
+                    document.getElementById('res1').value = document.getElementById('res1').value + "9";
+                }
+            },false)
+            btnzero.addEventListener('click',function(){
+                if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+                    document.getElementById('res1').value = "0";
+                }else{
+                    document.getElementById('res1').value = document.getElementById('res1').value + "0";
+                }
+            },false)
+            btnclr.addEventListener('click',function(){
+                document.getElementById('res1').value = "";
+                document.getElementById('res2').value = "";
+            },false)
+            btnplus.addEventListener('click',function(){
+                op = '+';
+                firstInput = parseInt(document.getElementById('res1').value);
+                document.getElementById('res1').value = "0";
+                document.getElementById('res2').value = firstInput + op;
+            },false)
+            btnminus.addEventListener('click',function(){
+                op = '-';
+                firstInput = parseInt(document.getElementById('res1').value);
+                document.getElementById('res1').value = "0";
+                document.getElementById('res2').value = firstInput + op;
+            },false)
+            btnmul.addEventListener('click',function(){
+                op = '*';
+                firstInput = parseInt(document.getElementById('res1').value);
+                document.getElementById('res1').value = "0";
+                document.getElementById('res2').value = firstInput + op;
+            },false)
+            btndiv.addEventListener('click',function(){
+                op = '/';
+                firstInput = parseInt(document.getElementById('res1').value);
+                document.getElementById('res1').value = "0";
+                document.getElementById('res2').value = firstInput + op;
+            },false)
+            btnmod.addEventListener('click',function(){
+                op = '%';
+                firstInput = parseInt(document.getElementById('res1').value);
+                document.getElementById('res1').value = "0";
+                document.getElementById('res2').value = firstInput + op;
+            },false)
+            btnpower.addEventListener('click',function(){
+                op = '^';
+                firstInput = parseInt(document.getElementById('res1').value);
+                document.getElementById('res1').value = "0";
+                document.getElementById('res2').value = firstInput + op;
+            },false)
+            btnsqrt.addEventListener('click',function(){
+               // op = 'S';
+                firstInput = parseInt(document.getElementById('res1').value);
+                result = Math.sqrt(firstInput);
+                document.getElementById('res1').value = result;
+                document.getElementById('res2').value = "SQRT("+firstInput+")="+result;
+            },false)
+            btndouble.addEventListener('click',function(){
+               // op = 'S';
+                firstInput = parseInt(document.getElementById('res1').value);
+                result = (firstInput*firstInput);
+                document.getElementById('res1').value = result;
+                document.getElementById('res2').value = "SQUARE("+firstInput+")="+result;
+            },false)
+
+            btnequal.addEventListener('click',function(){
+                secondInput = parseInt(document.getElementById('res1').value);
+                if(op=='+'){
+                    result = firstInput + secondInput;
+                }else if(op=='-'){
+                    result = firstInput - secondInput;
+                }else if(op=='*'){
+                    result = firstInput * secondInput;
+                }else if(op=='/'){
+                    result = firstInput / secondInput;
+                }else if(op=='%'){
+                    result = firstInput % secondInput;
+                }else if(op=='^'){
+                    result = Math.pow(firstInput,secondInput);
+                }
+                document.getElementById('res1').value = result.toString();
+                document.getElementById('res2').value = firstInput + op + secondInput + "=" + result.toString();
+            },false)
+        }
+    </script>
+</head>
+<body>
+    <h1>Calculator Assignment</h1>
+    <table border="1"> 
+        <tr>
+            <td colspan="4">
+                <input type="text" id="res1"><br>
+                <input type="text" id="res2">
+            </td>
+        </tr>
+        <tr>
+          <td><input type="button" value="1" id="one"></td> 
+          <td><input type="button" value="2" id="two"></td>
+          <td><input type="button" value="3" id="three"></td>
+          <td><input type="button" value="+" id="btnplus"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="4" id="four"></td> 
+            <td><input type="button" value="5" id="five"></td>
+            <td><input type="button" value="6" id="six"></td>
+            <td><input type="button" value="-" id="btnminus"></td>
+          </tr>
+          <tr>
+            <td><input type="button" value="7" id="seven"></td> 
+            <td><input type="button" value="8" id="eight"></td>
+            <td><input type="button" value="9" id="nine"></td>
+            <td><input type="button" value="*" id="btnmul"></td>
+          </tr>
+          <tr>
+            <td><input type="button" value="/" id="btndiv"></td> 
+            <td><input type="button" value="0" id="zero"></td>
+            <td><input type="button" value="S" id="btnsquare"></td>
+            <td><input type="button" value="^" id="btnpower"></td>
+          </tr>
+          <tr>
+            <td><input type="button" value="%" id="btnmod"></td> 
+            <td><input type="button" value="C" id="clr"></td>
+            <td><input type="button" value="=" id="btnequal"></td>
+            <td><input type="button" value="^2" id="btndouble"></td>
+          </tr>
+    </table>
+</body>
+</html>

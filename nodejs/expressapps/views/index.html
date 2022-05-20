@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <script>
+       
+    $(document).ready(function () {
+      $("#btnRegister").on("click", function () {
+        var username = document.getElementById('uname').value;
+        var password = document.getElementById('passw').value;
+        var emp1 = {
+            username:username,
+            password:password,
+        }
+        alert("Clicked");
+        $.ajax({
+          url: "http://localhost:7011/api/register",
+          method: "POST",
+          contentType: "application/json;charset=utf-8",
+          data: JSON.stringify(emp1),
+        })
+          .done(function (resp) {
+            $("#dv").html(JSON.stringify(resp));
+            alert("Success");
+          })
+          .fail(function (err) {
+            $("#dv").html(err);
+            alert("Failed");
+          });
+      });
+      $("#btnLogin").on("click", function () {
+        var usern = document.getElementById('loginuname').value;
+        var passw = document.getElementById('loginpassw').value;
+        console.log(`username is ${usern} and password is ${passw}`);
+        alert("Clicked");
+        $.ajax({
+          url: "http://localhost:7011/api/departments",
+          method: "GET",
+          dataType: 'json',
+          headers: {
+            "Authorization":   usern+':'+passw 
+                     }
+        })
+          .done(function (resp) {
+            $("#dv").html(JSON.stringify(resp));
+            alert("Success");
+          })
+          .fail(function (err) {
+            $("#dv").html(err);
+            alert("Failed");
+          });
+      });
+      $("#btnSave").on("click",function(){
+      alert("Save button is clicked")
+      var empNo = parseInt(document.getElementById("txtEmpNo").value);
+      var empName = document.getElementById("txtEmpName").value;
+      var designation = document.getElementById("txtDesig").value;
+      var deptno = document.getElementById("txtDept").value;
+      var salary = document.getElementById("txtSalary").value;
+      var emp1 = {
+        empno: empNo,
+        empname: empName,
+        designation: designation,
+        salary:salary,
+        deptno:deptno,
+      };
+        $.ajax({
+          url: "http://localhost:7011/api/employees",
+          type: "POST",
+          contentType: "application/json;charset=utf-8",
+          data: JSON.stringify(emp1),
+        })
+        .done(function (resp) {
+            $("#dv").html(JSON.stringify(resp));
+            $.each(resp.data, function (key, value) { 
+                console.log(value);
+							
+						})
+          })
+          .fail(function (err) {
+            $("#dv").html(err);
+            alert("Failed");
+          });
+    });
+    });
+    </script>
+</head>
+<body>
+    <h1>Index Page</h1>
+    <table class="table table-bordred table-striped">
+        <tbody>
+            <tr>
+                <td>
+                    <a href="/">Index</a>
+                </td>
+                <td>
+                    <a href="/home">Home</a>
+                </td>
+                <td>
+                    <a href="/about">About</a>
+                </td>
+                <td>
+                    <a href="/contact">Contact</a>
+                </td>
+            </tr>  
+        </tbody>
+    </table>
+    <h1>Assignment 19th April: Updated 18th April</h1>
+    <hr>
+    <div class="container">
+        <div class="row">
+          
+          <div class="col">
+            <h1>Register</h1>
+            <table class="table table-bordred table-striped">
+                <tr>
+                    <td>UserName</td><td><input type="text" id="uname" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td>Password</td><td><input type="text" id="passw" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><input type="button" id="btnRegister" value="Register" class="btn btn-primary"></td><td><input type="button" id="btnClear" value="Clear" class="btn btn-secondary"></td>
+                </tr>
+            </table>
+          </div>
+          <div class="col">
+            <h1>Login</h1>
+            <table class="table table-bordred table-striped" >
+                <tr>
+                    <td>UserName</td><td><input type="text" id="loginuname" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td>Password</td><td><input type="text" id="loginpassw" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td><input type="button" id="btnLogin" value="Login" class="btn btn-info"></td><td><input type="button" id="btnClear" value="Clear" class="btn btn-warning"></td>
+                </tr>
+            </table>
+          </div>
+         
+        </div>
+      </div>
+    
+    <hr>
+    <table class="table table-striped">
+        <tr>
+          <td>EmpNo</td>
+          <td><input type="text" id="txtEmpNo" class="form-control" /></td>
+        </tr>
+        <tr>
+          <td>EmpName</td>
+          <td><input type="text" id="txtEmpName" class="form-control" /></td>
+        </tr>
+        <tr>
+          <td>Designation</td>
+          <td><input type="text" id="txtDesig" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td>Salary</td>
+            <td><input type="text" id="txtSalary" class="form-control" /></td>
+          </tr>
+          <tr>
+            <td>Dept No</td>
+            <td><input type="text" id="txtDept" class="form-control" /></td>
+          </tr>
+        <tr>
+          <td></td>
+          <td>
+            <input type="button" id="btnSave" value="ADD" class="btn btn-primary" />
+            <input type="button" id="btnUpdate" value="Update" class="btn btn-warning" />
+            <input type="button" id="btnDelete" value="Delete" class="btn btn-danger" />
+            <input type="button" id="btnClear" value="Clear" class="btn btn-secondary" />
+          </td>
+        </tr>
+      </table>
+    <div id="dv"></div>
+</body>
+</html>

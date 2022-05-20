@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+        var str = "Indiana Jones is an American media franchise based on the adventures of Dr. Henry Walton \"Indiana\" Jones, Jr.\,\ a fictional professor of archaeology, that began in 1981 with the film Raiders of the Lost Ark. In 1984, a prequel, The Temple of Doom, was released, and in 1989, a sequel, The Last Crusade. A fourth film followed in 2008, titled The Kingdom of the Crystal Skull. A fifth film is in production and is provisionally scheduled to be released in 2023. The series was created by George Lucas and stars Harrison Ford as Indiana Jones.In 1992, the franchise expanded to a television series with The Young Indiana Jones Chronicles, portraying the character in his childhood and youth, and including adventures with his father. Marvel Comics began publishing The Further Adventures of Indiana Jones in 1983, and Dark Horse Comics gained the comic book rights to the character in 1991. Novelizations of the films have been published, as well as many novels with original adventures, including a series of German novels by Wolfgang Hohlbein, twelve novels set before the films published by Bantam Books, and a series set during the character's childhood inspired by the television show. Numerous Indiana Jones video games have been released since 1982."
+        document.getElementById('div1').innerHTML = str;
+        document.getElementById('div2').innerHTML = 'Total No. of characters: '+str.length;
+        var count = 0;
+        //var s = str.split(" ")
+        for(var i = 0;i<str.length-1;i++){
+           if((str.charAt(i)===" ") && (str.charAt(i+1)!==" ")){
+                count= count+1;              
+           }            
+              
+        }
+        //last word
+        count++; 
+        document.getElementById('div3').innerHTML = 'Total number of words: '+count;  
+        document.getElementById('div4').innerHTML = 'Total number of statements: '+str.split(".").length;  
+        //first split the string into array
+        var strarr = str.split(" ");
+        
+        for(var i=0;i<strarr.length-1;i++){
+            strarr[i] = strarr[i].charAt(0).toUpperCase() + strarr[i].slice(1)
+        }
+        console.log(strarr[0]);
+        //join the arry to string
+        var newstr = strarr.join(" ");
+       
+        document.getElementById('div5').innerHTML = 'Each Word Capital: '+newstr;
+        //reverse string:::
+        var reverseString = " ";
+        var strarr2 = str.split(" ");
+        for(var i=strarr2.length-1;i >=0;i--){
+           reverseString += strarr2[i]+" "; 
+        }
+        console.log(reverseString);
+        document.getElementById('div6').innerHTML = 'Reverse : '+reverseString;
+        // reverse each words in string:->
+        var words = str.split(" "); 
+        var reverseEachWord = " ";
+        for(var i =0;i<words.length;i++){
+            var word = words[i];
+            var reverseWord = " ";
+            for(var j = word.length-1;j>=0;j--){
+                reverseWord +=word.charAt(j);
+            }
+            reverseEachWord +=reverseWord;
+        }
+        document.getElementById('div7').innerHTML = 'Reverse Each Word : '+reverseEachWord;
+
+        //vowels
+        var vowels = ["a","e","i","o","u"];
+        var vowelCount = 0;
+        for(var s of str.toLowerCase()){
+            if(vowels.includes(s)){
+                vowelCount++;
+            }
+            
+        }
+        console.log("v "+vowelCount);
+        document.getElementById('div8').innerHTML = 'Vowels count : '+vowelCount;
+        var btn = document.getElementById('btn');
+        btn.addEventListener('click',function(){
+            var val = document.getElementById('txt1').value;
+            console.log('val is '+val);
+            var c = 0;
+            var k =[];
+           for(var i=0;i<str.length;i++){
+               if(str.charAt(i)==val){
+
+                   c += 1;
+                console.log(i);   
+               }
+                
+           }
+           document.getElementById('div9').innerHTML = 'Frquency of '+val+' is : '+c; 
+           
+        },false)
+        }
+
+    </script>
+</head>
+<body>
+    <h1>Assignment Part I</h1>
+    <div id="div1"></div><br>
+    <div id="div2"></div><br>
+    <div id="div3"></div><br>
+    <div id="div4"></div><br>
+    <div id="div5"></div><br>
+    <div id="div6"></div><br>
+    <div id="div7"></div><br>
+    <div id="div8"></div><br>
+    <div>
+        <input type="text" id="txt1">
+        <input type="button" value="Find Frequency" id="btn">
+        <div id="div9"></div><br>
+    </div>
+</body>
+</html>

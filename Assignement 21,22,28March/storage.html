@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./uigenerator copy.js"></script>
+    <script src="../jsfoundation/functionobjects/closefunction.js"></script>
+    <script>
+        window.onload = function(){
+            var empObj = new Logic();
+         var btnsave = document.getElementById("btnsave");
+         var btnedit = document.getElementById('btnedit');
+         btnsave.addEventListener('click',function(){
+             var empNo = parseInt(document.getElementById('empNo').value);
+             var empName = document.getElementById('empName').value;
+             var dvselectdeptname = document.getElementById('dvselectdeptname').value;
+             var dvselectdesigname = document.getElementById('dvselectdesigname').value;
+             var salary = parseInt(document.getElementById('salary').value);
+           
+            
+            var emp1 = {
+                 EmpNo:empNo,
+                 EmpName:empName,
+                 DeptName:dvselectdeptname,
+                 Designation:dvselectdesigname,
+                 Salary:salary
+
+             } 
+             console.log("dvselectdeptname"+dvselectdeptname);
+           
+            res = empObj.addEmployee(emp1); 
+         localStorage.setItem('Emp-'+emp1.EmpNo,JSON.stringify(emp1.EmpNo));
+        console.log('Employee After add = ' + JSON.stringify(res));
+         },false)
+
+
+         //UPDATE-DATA
+         btnedit.addEventListener('click',function(){
+             var empNo = parseInt(document.getElementById('empNo').value);
+             var empName = document.getElementById('empName').value;
+             var dvselectdeptname = document.getElementById('dvselectdeptname').value;
+             var dvselectdesigname = document.getElementById('dvselectdesigname').value;
+             var salary = parseInt(document.getElementById('salary').value);
+           
+            
+            var emp1 = {
+                 EmpNo:empNo,
+                 EmpName:empName,
+                 DeptName:dvselectdeptname,
+                 Designation:dvselectdesigname,
+                 Salary:salary
+
+             } 
+             console.log("dvselectdeptname"+dvselectdeptname);
+           
+            res = empObj.updateEmployee(emp1); 
+         localStorage.setItem('Emp-'+emp1.EmpNo,JSON.stringify(emp1.EmpNo));
+        console.log('Employee After Update = ' + JSON.stringify(res));
+         },false)
+     
+        // var res = empObj.getEmployees();
+        // console.log('Employees = ' + JSON.stringify(res));
+
+       // var emp = {EmpNo:103, EmpName: 'C', DeptName:'Development', Designation:'Developer', Salary:7866};   
+       
+
+    //     var emp1 = {EmpNo:103, EmpName: 'C'}; 
+    //     res = empObj.deleteEmployee(emp1);
+    //     console.log('Employees After delete = ' + JSON.stringify(res));
+
+    //    var emp3 = {EmpNo:102, EmpName:'h', DeptName:'Development', Designation:'Developer', Salary:8088};  
+    //    res = empObj.updateEmployee(emp3);
+    //     console.log('Employees After Update = ' + JSON.stringify(res)); 
+
+        var dept = empObj.getDeptname();
+       var uiGenerator2 = new UIGenerator(dept);
+       document.getElementById('dvselectdeptname').innerHTML = uiGenerator2.select();
+
+       var desig = empObj.getDesignationName();
+       var uiGenerator3 = new UIGenerator(desig);
+       document.getElementById('dvselectdesigname').innerHTML = uiGenerator3.select();
+        
+        
+        var btnlocaldataread = document.getElementById("btnlocaldataread");
+        btnlocaldataread.addEventListener('click',function(){
+            //show added data
+            localStorage.getItem(res);
+            var res2 = empObj.getEmployees();
+        var uiGenerator1 = new UIGenerator(res2);
+        document.getElementById('dvtable').innerHTML = uiGenerator1.table();
+        },false)
+
+       
+        }
+    </script>
+</head>
+<body>
+    <h1>Assignment 21st March: Using Local Storage</h1>
+    <h3>Table Using UIGenerator:</h3>
+    <div>
+        <input type="button" value="show" id="btnlocaldataread">
+    </div>
+    <div id="dvtable"></div><br>
+    <div>
+    
+        <table>
+            <tr>
+                <td>
+                   <lable> Employee No:</lable>
+                </td>
+                <td>
+                    <input type="text" id="empNo">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   <lable> Employee Name:</lable>
+                </td>
+                <td>
+                    <input type="text" id="empName">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   <lable> Department Name:</lable>
+                </td>
+                <td>
+                    <select id="dvselectdeptname"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   <lable> Designation Name:</lable>
+                </td>
+                <td>
+                  <select id="dvselectdesigname"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   <lable> Salary:</lable>
+                </td>
+                <td>
+                    <input type="text" id="salary">
+                </td>
+            </tr>
+            <tr>                
+                <td >
+                    <input type="button" id="btnsave" value="Save">
+                </td>
+                <td >
+                    <input type="button" id="btnedit" value="Update">
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</body>
+</html>

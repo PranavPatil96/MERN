@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="./../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <script src="./../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../bootstrappagination/closefunction.js"></script>
+    <script src="../bootstrappagination/uigenerator copy.js"></script>
+    <script>
+      window.onload = function () {
+        var empObj = new Logic();
+        var defaultData = empObj.getEmployees();
+        var uigenerator = new UIGenerator(defaultData);
+        document.getElementById("dvtable").innerHTML = uigenerator.table();
+
+        var DropDownValues = [5, 10, 15, 20];
+        var uigenerator1 = new UIGenerator(DropDownValues);
+        document.getElementById("dvselect").innerHTML = uigenerator1.select();
+
+        //call on change of dropdown
+        var dropDown = document.getElementById("dvselect");
+        dropDown.addEventListener(
+          "change",
+          function () {
+            var valOfSelect = dropDown.value;
+            var uigeneratorForPagination = new UIGenerator(valOfSelect);
+            document.getElementById("dvpagination").innerHTML =
+              uigeneratorForPagination.pagination();
+            var a = uigeneratorForPagination.pagination();
+
+            var res = empObj.getEmployeesByLimit(valOfSelect, 1);
+            var uigenerator = new UIGenerator(res);
+
+            document.getElementById("dvtable").innerHTML = uigenerator.table();
+            //var pagelink =document.getElementsByClassName('page-link');
+            var newPageLink = document.getElementsByTagName("li");
+            //paginationBtn(arrayPage);
+          //  smartList(0);
+            // function smartList(page, size = 5) {
+            //   let arrayList = [];
+            //   arrayList = res.slice().splice(page * size, size);
+            //   const showList = document.querySelectorAll(".page-link");
+            //   showList.forEach((elem, i) => {
+            //     let item = "";
+            //     for (let i = 0; i < arrayList.length; i++) {
+            //       item += `<div class='list__item'>${arrayList[i]}</div>`;
+            //     }
+            //     elem.innerHTML = item;
+            //   });
+            //   //btnPag[0].classList.add('pagination__btn-active');
+            // }
+            
+            const btnPag = document.querySelectorAll(".page-link");
+            btnPag.forEach((elem, i) => {
+              elem.addEventListener("click", () => {
+                //smartList(i);
+                var pageLinkValue = elem.innerHTML;
+                // if(i==1){
+                //     console.log("hhey");
+                //         document.getElementById('button_prev').pointerEvents = "";        
+                // }
+                if(elem.innerHTML=='Previous'){                    
+                    console.log("here i am"+document.getElementById('button_prev').innerHTML);
+                        console.log("pageLinkValue "+pageLinkValue+" i "+i);
+                        i--;
+                        var k = empObj.getEmployeesByLimit(valOfSelect,i);
+                        console.log("k = "+JSON.stringify(k));
+                        var uigenerator = new UIGenerator(k);                
+                    document.getElementById('dvtable').innerHTML = uigenerator.table();                    
+                }if(elem.innerHTML=='Next'){                    
+                    console.log("here i am"+document.getElementById('button_next').innerHTML);
+                        console.log("pageLinkValue "+pageLinkValue+" i "+i);
+                        i++;
+                        var k = empObj.getEmployeesByLimit(valOfSelect,i);
+                        console.log("k = "+JSON.stringify(k));
+                        var uigenerator = new UIGenerator(k);                
+                    document.getElementById('dvtable').innerHTML = uigenerator.table();                    
+                }
+                else{
+                console.log("ele "+elem.innerHTML);
+                var k = empObj.getEmployeesByLimit(valOfSelect,elem.innerHTML);
+                console.log("k = "+JSON.stringify(k));
+                var uigenerator = new UIGenerator(k);
+                
+                    document.getElementById('dvtable').innerHTML = uigenerator.table(); } 
+                    //document.getElementsByClassName('page-item')[i].classList.add('active');                  
+              });
+              
+            });
+
+            // for(var i = 0;i<pagelink.length;i++){
+            //     var currentPage = pagelink[i].innerHTML;
+            //     pagelink[i].addEventListener('click',function(){
+            //         console.log("q = "+currentPage);
+            //         //Adding active class to page-item element
+            //         document.getElementsByClassName('page-item')[3].classList.add('active');
+            //         //here: I am passing the ItemPerpage(valOfSelect) and currentPage
+            //         var k = empObj.getEmployeesByLimit(valOfSelect,currentPage);
+            //         var uigenerator = new UIGenerator(k);
+            //         document.getElementById('dvtable').innerHTML = uigenerator.table();
+            //     },false);
+            // }
+          },
+          false
+        );
+        //here myfun
+      };
+    </script>
+  </head>
+  <body>
+    <h1 class="text-center">Assignment 30<sup>th</sup> March</h1>
+    <h6>Table Using UI Generator</h6>
+    <div id="dvtable"></div>
+    <div>
+      <!-- Dropdown -->
+      <select id="dvselect"></select>
+    </div>
+    <div>
+      <!-- for pagination -->
+      <div id="dvpagination"></div>
+    </div>
+  </body>
+</html>

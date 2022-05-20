@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        font-family: "Courier New", Courier, monospace;
+        border: double;
+        width: 100%;
+      }
+      th,
+      td {
+        border: double;
+        padding: 8px;
+      }
+      .a:hover {
+        background-color: yellow;
+        font-size: 20px;
+        font-family: cursive;
+      }
+
+      tr:nth-child(2) {
+        background-color: Blue;
+      }
+
+      /*Third Column*/
+
+      tr:nth-child(3) {
+        background-color: orange;
+      }
+
+      tr:nth-child(4) {
+        background-color: gold;
+      }
+
+      tr:nth-child(5) {
+        background-color: Cyan;
+      }
+      tr:nth-child(6) {
+        background-color: cornflowerblue;
+      }
+
+      tr:nth-child(2):hover {
+        background-color: red;
+      }
+      tr:nth-child(3):hover {
+        background-color: chocolate;
+      }
+      tr:nth-child(4):hover {
+        background-color: cyan;
+      }
+      tr:nth-child(5):hover {
+        background-color: blue;
+      }
+      tr:nth-child(6):hover {
+        background-color: magenta;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <th>EmpNo</th>
+        <th>EmpName</th>
+        <th>DeptName</th>
+        <th>Salary</th>
+        <th>Designation</th>
+      </tr>
+      <tr class="a">
+        <td>101</td>
+        <td>Huma</td>
+        <td class="it">IT</td>
+        <td>200</td>
+        <td>Developer</td>
+      </tr>
+      <tr class="a">
+        <td>102</td>
+        <td>Tom</td>
+        <td class="hrd">HRD</td>
+        <td>300</td>
+        <td>TA</td>
+      </tr>
+      <tr class="a">
+        <td>103</td>
+        <td>John</td>
+        <td class="sales">Sales</td>
+        <td>200</td>
+        <td>Pre-Sales</td>
+      </tr>
+      <tr class="a">
+        <td>104</td>
+        <td>Jack</td>
+        <td class="acc">Accounts</td>
+        <td>200</td>
+        <td>Accountant</td>
+      </tr>
+      <tr class="a">
+        <td>105</td>
+        <td>Mack</td>
+        <td class="admin">Admin</td>
+        <td>290</td>
+        <td>Main Admin</td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .dropbutton{
+            background-color: brown;
+            color: yellow;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .dropdown{
+            display: inline;
+            position: relative;
+        }
+        .dropdown-hover{
+            display: none;
+            position: absolute;
+            background-color: chartreuse;
+            min-width: 150px;
+            box-shadow: 0px 8px 16px cyan;
+        }
+        /* define a style that will detect the mouse hover event and toggle through the classess. */
+        .dropdown:hover .dropbutton{
+            background-color: blue;
+        }
+        .dropdown:hover .dropdown-hover{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Apply Styles based on mouse events</h1>
+    <div class="dropdown">
+        <p>Hover the mouse cursor on the button to expand it as dropdown</p>
+        <button class="dropbutton">Select Link</button>
+      
+        <div class="dropdown-hover">
+            <a href="#">My Link 1</a>
+            <a href="#">My Link 2</a>
+            <a href="#">My Link 3</a>
+        </div>
+    </div>
+</body>
+</html>

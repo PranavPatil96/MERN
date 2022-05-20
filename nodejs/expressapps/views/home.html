@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="jquery.min.js"></script>
+  <link rel="stylesheet" href="bootstrap.min.css" />
+ 
+  <script>
+    $(document).ready(function () {
+      $("#btn").on("click", function () {
+        alert("Click using jQuery");
+      });
+    });
+    $(document).ready(function () {
+      $("#btn").on("click", function () {
+        alert("Clicked");
+        $.ajax({
+          url: "http://localhost:7011/api/employees",
+          method: "GET",
+        })
+          .done(function (resp) {
+            $("#dv").html(JSON.stringify(resp));
+            alert("Success");
+            $.each(resp.data, function (key, value) { 
+                console.log(value);
+							$('#exampleid').append("<tr>\
+										<td>"+value.EmpNo+"</td>\
+										<td>"+value.EmpName+"</td>\
+										<td>"+value.DeptName+"</td>\
+                                        \
+										</tr>");
+						})
+          })
+          .fail(function (err) {
+            $("#dv").html(err);
+            alert("Failed");
+          });
+      });
+    });
+    window.onload = function () {
+      var btnSave = document.getElementById("btnSave");
+      btnSave.addEventListener("click", SaveEmployee, false);
+      var btnClear = document.getElementById("btnClear");
+      btnClear.addEventListener("click", ClearEmployee, false);
+      var btnUpdate = document.getElementById("btnUpdate");
+      btnUpdate.addEventListener("click", UpdateEmployee, false);
+      var btnDelete = document.getElementById("btnDelete");
+      btnDelete.addEventListener("click", DeleteEmployee, false);
+      var btnSearchByName = document.getElementById("btnSearchByName");
+      btnSearchByName.addEventListener('click', SearchByName, false);
+      var btnSearchByAndCondition = document.getElementById("btnSearchByAndCondition");
+      btnSearchByAndCondition.addEventListener('click',SearchByAndCondition,false);
+      var txtEmpNo = document.getElementById("txtEmpNo");
+      txtEmpNo.addEventListener('change',ChangeEvent,false);
+    };
+    function SaveEmployee() {
+      var empNo = parseInt(document.getElementById("txtEmpNo").value);
+      var empName = document.getElementById("txtEmpName").value;
+      var deptName = document.getElementById("txtDept").value;
+      var emp1 = {
+        EmpNo: empNo,
+        EmpName: empName,
+        DeptName: deptName,
+      };
+      EmployeeAdd(emp1);
+      
+      function EmployeeAdd(emp1) {
+        $.ajax({
+          url: "http://localhost:7011/api/employees",
+          type: "POST",
+          contentType: "application/json;charset=utf-8",
+          data: JSON.stringify(emp1),
+        })
+        .done(function (resp) {
+            $("#dv").html(JSON.stringify(resp));
+            
+          })
+          .fail(function (err) {
+            $("#dv").html(err);
+            alert("Failed");
+          });
+       
+      }
+      
+    }
+    function ChangeEvent(){
+      var employeeNo = document.getElementById('txtEmpNo').value;
+      $.ajax({
+          url: "http://localhost:7011/api/employees/"+employeeNo,
+          type: "GET",
+          contentType: "application/json;charset=utf-8",
+        //  data: JSON.stringify(emp),
+        })
+        .done(function (resp) {
+            $("#dv").html(JSON.stringify(resp));
+            console.log(JSON.stringify(resp.data.EmpName));
+            $("#txtEmpName").val(resp.data.EmpName)
+            $("#txtDept").val(resp.data.DeptName)
+          })
+          .fail(function (err) {
+            $("#dv").html(err);
+            alert("Failed");
+          });
+    }
+    function ClearEmployee(){
+      document.getElementById('txtEmpNo').value = '';
+      document.getElementById('txtEmpName').value = '';
+      document.getElementById('txtDept').value = '';      
+    }
+    function UpdateEmployee(){
+      var empNo = parseInt(document.getElementById("txtEmpNo").value);
+      var empName = document.getElementById("txtEmpName").value;
+      var deptName = document.getElementById("txtDept").value;
+      var emp1 = {
+        EmpNo: empNo,
+        EmpName: empName,
+        DeptName: deptName,
+      };
+      EmployeeUpdate(emp1,empNo);
+      
+      function EmployeeUpdate(emp1,empNo) {
+        $.ajax({
+          url: "http://localhost:7011/api/employees/"+empNo,
+          type: "PUT",
+          contentType: "application/json;charset=utf-8",
+          data: JSON.stringify(emp1),
+        })
+        .done(function (resp) {
+            $("#dv").html(JSON.stringify(resp));
+            
+          })
+          .fail(function (err) {
+            $("#dv").html(err);
+            alert("Failed");
+          });
+       
+      }      
+    }
+    function DeleteEmployee(){
+      var employeeNo = document.getElementById('txtEmpNo').value;
+      $.ajax({
+          url: "http://localhost:7011/api/employees/"+employeeNo,
+          type: "DELETE",
+          contentType: "application/json;charset=utf-8",
+         // data: JSON.stringify(emp1),
+        })
+        .done(function (resp) {
+            $("#dv").html(JSON.stringify(resp));
+            alert(employeeNo+ " is deleted successfully!")
+          })
+          .fail(function (err) {
+            $("#dv").html(err);
+            alert("Failed");
+          });
+          document.getElementById('txtEmpNo').value = '';
+      document.getElementById('txtEmpName').value = '';
+      document.getElementById('txtDept').value = '';
+    }
+
+    function SearchByName(){
+      var searchbyEmpName = document.getElementById("searchbyEmpName").value;
+      var searchbyDeptName = document.getElementById("searchbyDeptName").value;
+      $.ajax({
+          url: "http://localhost:7011/api/employees/search/"+searchbyEmpName+"/"+searchbyDeptName,
+          method: "GET",
+        })
+          .done(function (resp) {
+            $("#dv").html(JSON.stringify(resp));
+            alert("Success");
+          })
+          .fail(function (err) {
+            $("#dv").html(err);
+            alert("Failed");
+          });     
+
+          function UpdateTable(res){
+            $.each(resp.data, function (key, value) { 
+                console.log(value);
+							$('#exampleid').append("<tr>\
+										<td>"+value.EmpNo+"</td>\
+										<td>"+value.EmpName+"</td>\
+										<td>"+value.DeptName+"</td>\
+                                        \
+										</tr>");
+						})
+          }
+    }
+
+    function SearchByAndCondition(){
+      var searchbyEmpName = document.getElementById("txtEmployeeName").value;
+      console.log("serach "+searchbyEmpName);
+      var searchbyDeptName = document.getElementById("txtDepartName").value;
+      $.ajax({
+          url: "http://localhost:7011/api/employees/searchbyand/"+searchbyEmpName+"/"+searchbyDeptName,
+          method: "GET",
+        })
+          .done(function (resp) {
+            $("#dv").html(JSON.stringify(resp));
+            alert("Success");
+          })
+          .fail(function (err) {
+            $("#dv").html(err);
+            alert("Failed");
+          });     
+    }
+  </script>
+</head>
+
+<body>
+  <h1>The Home Page</h1>
+  <table class="table table-bordred table-striped">
+    <tbody>
+      <tr>
+        <td>
+          <a href="/">Index</a>
+        </td>
+        <td>
+          <a href="/home">Home</a>
+        </td>
+        <td>
+          <a href="/about">About</a>
+        </td>
+        <td>
+          <a href="/contact">Contact</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button id="btn" class="btn btn-primary">Click Me</button>
+  <hr />
+  <!-- <div id="dv"></div> -->
+  <h1>Assignment 14th April</h1>
+  <hr />
+  <table class="table table-striped">
+    <tr>
+      <td>EmpNo</td>
+      <td><input type="text" id="txtEmpNo" class="form-control" /></td>
+    </tr>
+    <tr>
+      <td>EmpName</td>
+      <td><input type="text" id="txtEmpName" class="form-control" /></td>
+    </tr>
+    <tr>
+      <td>Department name</td>
+      <td><input type="text" id="txtDept" class="form-control" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <input type="button" id="btnSave" value="ADD" class="btn btn-primary" />
+        <input type="button" id="btnUpdate" value="Update" class="btn btn-warning" />
+        <input type="button" id="btnDelete" value="Delete" class="btn btn-danger" />
+        <input type="button" id="btnClear" value="Clear" class="btn btn-secondary" />
+      </td>
+    </tr>
+  </table>
+  <hr>
+  <div id="dvtable"></div><br>
+  
+<div class="col-lg-6">
+  <table class="table table-bordered table-striped">
+          <thead>
+          <tr>
+              <th>Employee no</th>
+              <th>Employee name</th>
+              <th>Dept Name </th>
+          </tr>
+          </thead>
+  <tbody id="exampleid">
+  </tbody>
+      </table> 
+</div>
+
+<hr>
+<div class="container">
+  <div class="row">
+    <h1>Search By OR Condition</h1>
+    <div class="col">
+      <input type="text" class="form-control" id="searchbyEmpName" placeholder="Search By Employee Name">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" id="searchbyDeptName" placeholder="Search By Dept Name">
+    </div>
+    <div class="col">
+      <input type="button" value="Search" id="btnSearchByName" class="btn btn-primary">
+    </div>
+  </div>
+</div>
+<!-- SERACH BY && -->
+<div class="container">
+  <div class="row">
+    <h1>Search By AND Condition</h1>
+    <div class="col">
+      <input type="text" class="form-control" id="txtEmployeeName" placeholder="Search By Employee Name">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" id="txtDepartName" placeholder="Search By Dept Name">
+    </div>
+    <div class="col">
+      <input type="button" value="Search" id="btnSearchByAndCondition" class="btn btn-primary">
+    </div>
+  </div>
+</div>
+<div id="dv"></div>
+</body>
+
+</html>

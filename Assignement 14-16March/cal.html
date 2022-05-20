@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Calculator</title>
+    <script>
+        window.onload = function(){
+        let screen = document.getElementById('val');
+        buttonsList = document.querySelectorAll('button');
+        let res = '';
+        let nextValue = '';
+        for (item of buttonsList) {
+            item.addEventListener('click', function(e) {
+                buttonText = e.target.innerText;
+                console.log('Button text is ', buttonText);
+                if (buttonText == 'X') {
+                    buttonText = '*';
+                    res += buttonText;
+                    screen.value = res;
+                } else if (buttonText == '%') {
+                    res = screenValue % 100;
+                    screen.value = res;
+                } else if (buttonText == 'C') {
+                    res = "";
+                    screen.value = res;
+                } else if (buttonText == 'S') {
+                    res = res * res;
+                    screen.value = res;
+                } else if (buttonText == 'M') {
+                    buttonText = '%';
+                    res += buttonText;
+                    screen.value = res;
+                }
+                else if (buttonText == '=') {
+                    screen.value = eval(res);
+                } else {
+                    res += buttonText;
+                    screen.value = res;
+                }
+    
+            })
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Calculator</h1>
+
+        <div class="calculator">
+            <input type="text" name="screen" id="val">
+            <table border="1">
+               
+                <tr>
+                    <td><button>7</button></td>
+                    <td><button>8</button></td>
+                    <td><button>9</button></td>
+                    <td><button>X</button></td>
+                </tr>
+                <tr>
+                    <td><button>4</button></td>
+                    <td><button>5</button></td>
+                    <td><button>6</button></td>
+                    <td><button>-</button></td>
+                </tr>
+                <tr>
+                    <td><button>1</button></td>
+                    <td><button>2</button></td>
+                    <td><button>3</button></td>
+                    <td><button>+</button></td>
+                </tr>
+                <tr>
+                    <td><button>0</button></td>
+                    <td><button>.</button></td>
+                    <td><button>/</button></td>
+                    <td><button>=</button></td>
+                </tr>
+                <tr>
+
+                    <td><button>C</button></td>
+                    <td><button>%</button></td>
+                    <td><button>Sq</button></td>
+                    <td><button>M</button></td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+
+</html>

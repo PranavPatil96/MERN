@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            var dtsrc = document.getElementById('dtsrc');
+            var timsrc = document.getElementById('timsrc');
+            var dttgt = document.getElementById('dttgt');
+            var timtgt = document.getElementById('timtgt');
+            var btndiff = document.getElementById('btndiff');
+
+            // Calling evenlistener on 'GET DIFFERENCE BUTTON'
+            btndiff.addEventListener('click',function(){
+
+            //time--------------------------------->
+
+                console.log(timsrc.value);
+                if(timsrc!==""){
+                    var hours = timsrc.value.split(":")[0];
+                    var minutes = timsrc.value.split(":")[1];
+                    console.log("hours "+hours+" min "+minutes);
+                }
+                if(timtgt!==""){
+                    var endhours = timtgt.value.split(":")[0];
+                    var endminutes = timtgt.value.split(":")[1];
+                }
+                          //--------------------------------------->
+
+                var startDate = new Date(dtsrc.value);
+               
+                startDate.setHours(hours);
+                startDate.setMinutes(minutes);
+                console.log("start date is "+startDate);
+                
+                var endDate = new Date(dttgt.value);
+                endDate.setHours(endhours);
+                endDate.setMinutes(endminutes);
+                console.log("start date is "+endDate);
+
+                var diffTime = Math.abs(endDate - startDate);
+                var diffDays = Math.ceil(diffTime/(1000*60*60*24)-1);
+
+                var timeDiff = endhours-hours;
+                var minDiff = Math.abs(endminutes-minutes);
+                
+                var timeInSeconds = (diffTime/1000);
+                console.log("seconds "+(diffTime/1000));
+            
+                var diffInMinutes = Math.ceil(timeInSeconds/60);
+                var diffInHours = Math.ceil(diffInMinutes/60);
+                var diffInDays = Math.floor(diffInHours/24);
+                var diffInMonths = Math.floor(diffInDays/24);
+                var diffInYears = Math.floor((diffInMonths/12)); // round to 2 decimal
+
+
+            
+
+                //leap year
+                var srcyear = startDate.getFullYear();
+                var tgtyear = endDate.getFullYear();
+                if(leapYear(srcyear)){
+                    document.getElementById("div5").innerHTML = 'Source date is a leap year'
+
+                }
+                if(leapYear(tgtyear)){
+                    document.getElementById("div6").innerHTML = 'Destination date is a leap year'
+                }
+                function leapYear(year){
+                    return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+                } 
+                //get days in month
+                var m1 = startDate.getMonth();
+                var y1 = startDate.getFullYear();
+
+                var m2 = endDate.getMonth();
+                var y2 = endDate.getFullYear();
+
+                var startDateMonth = getDaysInMonth(m1,y1);
+                var EndDateMonth = getDaysInMonth(m2,y2);
+
+                function getDaysInMonth(m,y){
+                    return new Date(y,m+1,0).getDate();
+                }    
+               // console.log("days in month "+startDateMonth);         
+                // document.getElementById("div7").innerHTML = 'Days in Start date is '+startDateMonth;
+                // document.getElementById("div8").innerHTML = 'Days in End date is '+EndDateMonth;
+                // if(days>365366){
+                //     days +=365;
+                // }else if(days>28){
+                //     days = days + 28
+                // }else if(days>30){
+                //     days = days + 30
+                // }else if(days>31){
+                //     days = days + 31
+                // }else if(days>28){
+                //     days = days + 28
+                // }else if(monthdiff>12){
+                //     monthdiff +=365;
+                // }else if(hoursdiff>24){
+                //     hoursdiff +=24
+                // }else if(minsdiff>60){
+                //     minsdiff +=60
+                // }else if(seconddiff>60){
+                //     seconddiff +=60
+                // }
+
+                if(diffDays>28){
+                    diffDays +=1;
+                }
+                // if(diffInDays>365366){
+                //     diffInDays +=365;
+                // }
+                // if(diffInHours>28){
+                //     diffInDays +=1;
+                // }if(diffInMinutes>60){
+                //     diffInHours +=1;
+                // }
+                // if(timeInSeconds>60){
+                //     diffInMinutes +=1;
+                // }
+                
+              
+
+                //console.log("days "+days);
+                // document.getElementById("div0").innerHTML = 'Difference in Years :'+yeardiff;
+                // document.getElementById("div1").innerHTML = 'Difference in Days :'+days;
+                // document.getElementById("div2").innerHTML = 'Difference in Months :'+monthdiff;
+                // document.getElementById("div3").innerHTML = 'Difference in Hours :'+hoursdiff;
+               
+                document.getElementById("div0").innerHTML = 'Diffrence between two dates is <strong> '+diffDays+ ' days '+timeDiff+' hours, and ' +minDiff+ ' minutes.</strong>';
+                document.getElementById("div1").innerHTML = 'Difference in Seconds :'+timeInSeconds;
+                document.getElementById("div2").innerHTML = 'Difference in Minutes :'+diffInMinutes;
+                document.getElementById("div3").innerHTML = 'Difference in Hours :'+diffInHours;
+                document.getElementById("div4").innerHTML = 'Difference in Days :'+diffInDays;
+                document.getElementById("div5").innerHTML = 'Difference in Months :'+diffInMonths;
+                document.getElementById("div6").innerHTML = 'Difference in Years :'+diffInYears;
+
+
+            },false)
+
+        }
+    </script>
+</head>
+<body>
+    <h1>Calculate a Date Difference in Years, Months, Days, Hours, Minutes and Seconds</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    Select Source Date
+                </td>
+                <td>
+                    <input type="date" id="dtsrc">
+                </td>
+                <td>
+                    <input type="time" id="timsrc">
+                </td> 
+            </tr>
+            <tr>
+                <td>
+                    Select Target Date
+                </td>
+                <td>
+                    <input type="date" id="dttgt">
+                </td>
+                <td>
+                    <input type="time" id="timtgt">
+                </td> 
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <input type="button" value="Get Difference" id="btndiff">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div id="div0"></div>
+                    <div id="div1"></div>
+                    <div id="div2"></div>
+                    <div id="div3"></div>
+                    <div id="div4"></div>
+                    <div id="div5"></div>
+                    <div id="div6"></div>
+                    <div id="div7"></div>
+                    <div id="div8"></div>
+
+
+
+                    <!-- Updated code -->
+                    <div id="dv"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

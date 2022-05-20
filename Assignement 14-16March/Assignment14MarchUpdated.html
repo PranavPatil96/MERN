@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            var firstInput,secondInput,op,result;
+
+            var buttons = document.querySelectorAll('button');
+            var res1 = document.getElementById('res1');
+            var res2 = document.getElementById('res2');
+            console.log("Button "+buttons.value);
+            // Get ID of Each Buttons
+            // var btnone = document.getElementById('one');
+            // var btntwo = document.getElementById('two');
+            // var btnthree = document.getElementById('three');
+            // var btnfour = document.getElementById('four');
+            // var btnfive = document.getElementById('five');
+            // var btnsix = document.getElementById('six');
+            // var btnseven = document.getElementById('seven');
+            // var btneight = document.getElementById('eight');
+            // var btnnine = document.getElementById('nine');
+            // var btnzero = document.getElementById('zero');
+            // var btnclr = document.getElementById('clr');
+            // var btnplus = document.getElementById('btnplus');
+            // var btnminus = document.getElementById('btnminus');
+            // var btnmul = document.getElementById('btnmul');
+            // var btndiv = document.getElementById('btndiv');
+            // var btnmod = document.getElementById('btnmod');
+            // var btnsqrt = document.getElementById('btnsquare');
+            // var btnpower = document.getElementById('btnpower');
+            // var btnequal = document.getElementById('btnequal');
+            // var btndouble = document.getElementById('btndouble');
+
+            console.log("========================ADD EVENT LISTENER========================================");
+            var result = '';
+            var nextValue = '';
+            for(allButtons of buttons){
+                allButtons.addEventListener('click', function(e){
+                   btnVal = e.target.innerText;
+                   console.log("btnval "+btnVal);
+                   if(btnVal=='C'){
+                      // btnVal = '';
+                      result = '';                    
+                       res1.value = result;
+                   }else if(btnVal=='%'){
+                       result = result / 100;
+                       res1.value = result;
+                   }else if(btnVal=='S'){
+                       result = result * result;
+                       res1.value = result;
+                     //  res2.value = result
+                   }else if(btnVal=='^2'){
+                       result = Math.sqrt(result);
+                       res1.value = result;
+                   }else if(btnVal=='^'){
+                        btnVal = '^';
+                        result +=btnVal;
+                        result = Math.pow(result,nextValue);
+                        res1.value = result;
+                   }
+                   else if(btnVal=='='){
+                       res2.value = eval(result)
+                       
+                   }
+                   else {
+                    result += btnVal;
+                res1.value = result;
+            }
+               },'false')
+           }
+            // btnone.addEventListener('click',function(){
+            //     if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+            //         document.getElementById('res1').value = "1";
+            //     }else{
+            //         document.getElementById('res1').value = document.getElementById('res1').value + "1";
+            //     }
+            // },false)
+            // btntwo.addEventListener('click',function(){
+            //     if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+            //         document.getElementById('res1').value = "2";
+            //     }else{
+            //         document.getElementById('res1').value = document.getElementById('res1').value + "2";
+            //     }
+            // },false)
+            // btnthree.addEventListener('click',function(){
+            //     if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+            //         document.getElementById('res1').value = "3";
+            //     }else{
+            //         document.getElementById('res1').value = document.getElementById('res1').value + "3";
+            //     }
+            // },false)
+            // btnfour.addEventListener('click',function(){
+            //     if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+            //         document.getElementById('res1').value = "4";
+            //     }else{
+            //         document.getElementById('res1').value = document.getElementById('res1').value + "4";
+            //     }
+            // },false)
+            // btnfive.addEventListener('click',function(){
+            //     if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+            //         document.getElementById('res1').value = "5";
+            //     }else{
+            //         document.getElementById('res1').value = document.getElementById('res1').value + "5";
+            //     }
+            // },false)
+            // btnsix.addEventListener('click',function(){
+            //     if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+            //         document.getElementById('res1').value = "6";
+            //     }else{
+            //         document.getElementById('res1').value = document.getElementById('res1').value + "6";
+            //     }
+            // },false)
+            // btnseven.addEventListener('click',function(){
+            //     if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+            //         document.getElementById('res1').value = "7";
+            //     }else{
+            //         document.getElementById('res1').value = document.getElementById('res1').value + "7";
+            //     }
+            // },false)
+            // btneight.addEventListener('click',function(){
+            //     if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+            //         document.getElementById('res1').value = "8";
+            //     }else{
+            //         document.getElementById('res1').value = document.getElementById('res1').value + "8";
+            //     }
+            // },false)
+            // btnnine.addEventListener('click',function(){
+            //     if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+            //         document.getElementById('res1').value = "9";
+            //     }else{
+            //         document.getElementById('res1').value = document.getElementById('res1').value + "9";
+            //     }
+            // },false)
+            // btnzero.addEventListener('click',function(){
+            //     if(document.getElementById('res1').value == '0' || document.getElementById('res1').value==result ){
+            //         document.getElementById('res1').value = "0";
+            //     }else{
+            //         document.getElementById('res1').value = document.getElementById('res1').value + "0";
+            //     }
+            // },false)
+            // btnclr.addEventListener('click',function(){
+            //     document.getElementById('res1').value = "";
+            //     document.getElementById('res2').value = "";
+            // },false)
+            // btnplus.addEventListener('click',function(){
+            //     op = '+';
+            //     firstInput = parseInt(document.getElementById('res1').value);
+            //     document.getElementById('res1').value = "0";
+            //     document.getElementById('res2').value = firstInput + op;
+            // },false)
+            // btnminus.addEventListener('click',function(){
+            //     op = '-';
+            //     firstInput = parseInt(document.getElementById('res1').value);
+            //     document.getElementById('res1').value = "0";
+            //     document.getElementById('res2').value = firstInput + op;
+            // },false)
+            // btnmul.addEventListener('click',function(){
+            //     op = '*';
+            //     firstInput = parseInt(document.getElementById('res1').value);
+            //     document.getElementById('res1').value = "0";
+            //     document.getElementById('res2').value = firstInput + op;
+            // },false)
+            // btndiv.addEventListener('click',function(){
+            //     op = '/';
+            //     firstInput = parseInt(document.getElementById('res1').value);
+            //     document.getElementById('res1').value = "0";
+            //     document.getElementById('res2').value = firstInput + op;
+            // },false)
+            // btnmod.addEventListener('click',function(){
+            //     op = '%';
+            //     firstInput = parseInt(document.getElementById('res1').value);
+            //     document.getElementById('res1').value = "0";
+            //     document.getElementById('res2').value = firstInput + op;
+            // },false)
+            // btnpower.addEventListener('click',function(){
+            //     op = '^';
+            //     firstInput = parseInt(document.getElementById('res1').value);
+            //     document.getElementById('res1').value = "0";
+            //     document.getElementById('res2').value = firstInput + op;
+            // },false)
+            // btnsqrt.addEventListener('click',function(){
+            //    // op = 'S';
+            //     firstInput = parseInt(document.getElementById('res1').value);
+            //     result = Math.sqrt(firstInput);
+            //     document.getElementById('res1').value = result;
+            //     document.getElementById('res2').value = "SQRT("+firstInput+")="+result;
+            // },false)
+            // btndouble.addEventListener('click',function(){
+            //    // op = 'S';
+            //     firstInput = parseInt(document.getElementById('res1').value);
+            //     result = (firstInput*firstInput);
+            //     document.getElementById('res1').value = result;
+            //     document.getElementById('res2').value = "SQUARE("+firstInput+")="+result;
+            // },false)
+
+            // btnequal.addEventListener('click',function(){
+            //     secondInput = parseInt(document.getElementById('res1').value);
+            //     if(op=='+'){
+            //         result = firstInput + secondInput;
+            //     }else if(op=='-'){
+            //         result = firstInput - secondInput;
+            //     }else if(op=='*'){
+            //         result = firstInput * secondInput;
+            //     }else if(op=='/'){
+            //         result = firstInput / secondInput;
+            //     }else if(op=='%'){
+            //         result = firstInput % secondInput;
+            //     }else if(op=='^'){
+            //         result = Math.pow(firstInput,secondInput);
+            //     }
+            //     document.getElementById('res1').value = result.toString();
+            //     document.getElementById('res2').value = firstInput + op + secondInput + "=" + result.toString();
+            // },false)
+        }
+    </script>
+</head>
+<body>
+    <h1>Calculator Assignment</h1>
+    <table border="1"> 
+        <tr>
+            <td colspan="4">
+                <input type="text" id="res1"><br>
+                 <input type="text" id="res2">
+            </td>
+        </tr>
+        <tr>
+          <td><button>1</button></td> 
+          <td><button>2</button></td>
+          <td><button>3</button></td>
+          <td><button>+</button></td>
+        </tr>
+        <tr>
+            <td><button>4</button></td> 
+            <td><button>5</button></td>
+            <td><button>6</button></td>
+            <td><button>-</button></td>
+          </tr>
+          <tr>
+            <td><button>7</button></td> 
+            <td><button>8</button></td>
+            <td><button>9</button></td>
+            <td><button>*</button></td>
+          </tr>
+          <tr>
+            <td><button>/</button></td> 
+            <td><button>0</button></td>
+            <td><button>S</button></td>
+            <td><button>^2</button></td>
+            <!-- <td><button>^</button></td> -->
+          </tr>
+          <tr>
+            <td><button>%</button></td> 
+            <td><button>C</button></td>
+            <td><button>=</button></td>
+           
+          </tr>
+    </table>
+</body>
+</html>
